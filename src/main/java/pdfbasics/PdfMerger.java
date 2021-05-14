@@ -1,7 +1,5 @@
 package pdfbasics;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -25,27 +24,23 @@ import org.apache.xmpbox.schema.PDFAIdentificationSchema;
 import org.apache.xmpbox.schema.XMPBasicSchema;
 import org.apache.xmpbox.type.BadFieldValueException;
 import org.apache.xmpbox.xml.XmpSerializer;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
-class PdfLT {
+public class PdfMerger {
+	
+	private static final Logger log = Logger.getLogger(PdfMerger.class.getName());
 
-	private static final Logger LOG = Logger.getLogger(PdfLT.class.getName());
-
-	@TempDir Path tempDir;
-
-	@Test @DisplayName("test")
-	void test() throws IOException, InterruptedException {
-		
-		final InputStream firstFileContent = getClass().getResourceAsStream("sample-01.pdf");
-		final InputStream secondFileContent = getClass().getResourceAsStream("sample-02.pdf");
-
-		final InputStream merged = merge(List.of(firstFileContent, secondFileContent));
-
-		Files.copy(merged, tempDir.resolve("merged.pdf"));
-		
-		MINUTES.sleep(10);
+	public void merge(final List<Path> filesToMerge, final Path outputFile) throws IOException {
+		final List<InputStream> inputStreams = new ArrayList<>();
+		for (final Path path : filesToMerge) {
+			final InputStream inputStream = Files.newInputStream(path);
+			inputStreams.add(inputStream);
+		}
+		mergeContents(inputStreams, outputFile);
+	}
+	
+	public void mergeContents(final List<InputStream> fileContents, final Path outputFile) throws IOException {
+		final InputStream merged = mergeContents(fileContents);
+		Files.copy(merged, outputFile);
 	}
 
 	/**
@@ -58,7 +53,7 @@ class PdfLT {
 	 * @return compound PDF document as a readable input stream.
 	 * @throws IOException if anything goes wrong during PDF merge.
 	 */
-	public InputStream merge(final List<InputStream> sources) throws IOException {
+	public InputStream mergeContents(final List<InputStream> sources) throws IOException {
 		final String title = "";
 		final String creator = "";
 		final String subject = "";
@@ -77,9 +72,9 @@ class PdfLT {
 			pdfMerger.setDestinationDocumentInformation(pdfDocumentInfo);
 			pdfMerger.setDestinationMetadata(xmpMetadata);
 
-			LOG.info("Merging " + sources.size() + " source documents into one PDF");
+			log.info("Merging " + sources.size() + " source documents into one PDF");
 			pdfMerger.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
-			LOG.info("PDF merge successful, size = {" + mergedPDFOutputStream.size() + "} bytes");
+			log.info("PDF merge successful, size = {" + mergedPDFOutputStream.size() + "} bytes");
 
 			return new ByteArrayInputStream(mergedPDFOutputStream.toByteArray());
 		} catch (final BadFieldValueException | TransformerException e) {
@@ -90,7 +85,7 @@ class PdfLT {
 	}
 
 	private PDFMergerUtility createPDFMergerUtility(final List<InputStream> sources, final ByteArrayOutputStream mergedPDFOutputStream) {
-		LOG.info("Initialising PDF merge utility");
+		log.info("Initialising PDF merge utility");
 		final PDFMergerUtility pdfMerger = new PDFMergerUtility();
 		pdfMerger.addSources(sources);
 		pdfMerger.setDestinationStream(mergedPDFOutputStream);
@@ -98,7 +93,7 @@ class PdfLT {
 	}
 
 	private PDDocumentInformation createPDFDocumentInfo(final String title, final String creator, final String subject) {
-		LOG.info("Setting document info (title, author, subject) for merged PDF");
+		log.info("Setting document info (title, author, subject) for merged PDF");
 		final PDDocumentInformation documentInformation = new PDDocumentInformation();
 		documentInformation.setTitle(title);
 		documentInformation.setCreator(creator);
@@ -109,7 +104,7 @@ class PdfLT {
 	private PDMetadata createXMPMetadata(final COSStream cosStream, final String title, final String creator, final String subject)
 			throws BadFieldValueException, TransformerException, IOException {
 				
-		LOG.info("Setting XMP metadata (title, author, subject) for merged PDF");
+		log.info("Setting XMP metadata (title, author, subject) for merged PDF");
 		final XMPMetadata xmpMetadata = XMPMetadata.createXMPMetadata();
 
 		// PDF/A-1b properties
