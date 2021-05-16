@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,7 +26,6 @@ public class PdfBasicsMain extends JFrame {
 	private final PdfMerger pdfMerger;
 
 	public static void main(final String[] args) {
-		System.out.println("classpath: " + System.getProperty("java.class.path"));
 
 		initLookAndFeel();
 
@@ -68,10 +66,13 @@ public class PdfBasicsMain extends JFrame {
 			final List<Path> files = IntStream.range(0, listModel.size()).mapToObj(listModel::get).collect(toList());
 			log.info(() -> "files: " + files); // TODO remove verbose logging
 			final String userHome = System.getProperty("user.home");
+			final Path outputFile = Paths.get(userHome, "merged_" + dateTimeSuffix() + ".pdf");
 			try {
-				pdfMerger.merge(files, Paths.get(userHome, "merged_" + dateTimeSuffix() + ".pdf"));
+				pdfMerger.merge(files, outputFile);
+				JOptionPane.showMessageDialog(this, outputFile, "Success", JOptionPane.INFORMATION_MESSAGE);
 			} catch (final IOException ioe) {
 				ioe.printStackTrace();
+				JOptionPane.showMessageDialog(this, ioe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -124,10 +125,10 @@ public class PdfBasicsMain extends JFrame {
 				System.out.println("no drop");
 				return false;
 			}
+			
 			final JList.DropLocation dropLocation = (JList.DropLocation) support.getDropLocation();
 			final int dropIndex = dropLocation.getIndex(); // TODO insert dropped files to specific position
-			final boolean insert = dropLocation.isInsert(); // TODO what is an insert location ?
-			log.info(() -> "insert: " + insert); // TODO remove verbose logging
+			
 			final Transferable transferable = support.getTransferable();
 			try {
 				@SuppressWarnings("unchecked")
