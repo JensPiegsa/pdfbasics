@@ -26,7 +26,8 @@ public class PdfBasicsMain extends JFrame {
 	private final DefaultListModel<Path> listModel;
 	private final PdfMerger pdfMerger;
 
-	public static void main(final String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public static void main(final String[] args) {
+		System.out.println("classpath: " + System.getProperty("java.class.path"));
 
 		initLookAndFeel();
 
@@ -41,7 +42,8 @@ public class PdfBasicsMain extends JFrame {
 		super("PDF Basics 1.0");
 		this.pdfMerger = pdfMerger;
 
-		setIconImage(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE));
+		final Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("pdfbasics.png"));
+		setIconImage(icon);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 
