@@ -23,6 +23,16 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <target>${maven.compiler.release}</target>
+                    <source>${maven.compiler.release}</source>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>io.github.fvarrui</groupId>
                 <artifactId>javapackager</artifactId>
                 <version>1.5.1</version>
@@ -37,7 +47,6 @@
                             <bundleJre>true</bundleJre>
                             <generateInstaller>false</generateInstaller>
                             <administratorRequired>false</administratorRequired>
-<!--                            <classpath>./libs/*.jar</classpath>-->
                             <platform>windows</platform>
                             <!-- TODO see https://github.com/fvarrui/JavaPackager/blob/master/docs/windows-specific-properties.md -->
                             <winConfig>
@@ -51,13 +60,21 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <target>${maven.compiler.release}</target>
-                    <source>${maven.compiler.release}</source>
-                    <release>${maven.compiler.release}</release>
-                </configuration>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/zip-win-64.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
