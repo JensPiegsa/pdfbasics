@@ -6,7 +6,7 @@
 
     <groupId>pdfbasics</groupId>
     <artifactId>pdfbasics</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
 
     <properties>
         <!-- version 3 has some class loading issues regarding IOUtils in packaged exe -->
