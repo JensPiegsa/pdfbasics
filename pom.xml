@@ -6,16 +6,12 @@
 
     <groupId>pdfbasics</groupId>
     <artifactId>pdfbasics</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
-<!--        <java.version>16</java.version>-->
-        
         <!-- version 3 has some class loading issues regarding IOUtils in packaged exe -->
         <pdfbox.version>2.0.23</pdfbox.version>
         
-<!--        <maven.compiler.source>${java.version}</maven.compiler.source>-->
-<!--        <maven.compiler.target>${java.version}</maven.compiler.target>-->
         <maven.compiler.release>16</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
