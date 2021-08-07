@@ -6,11 +6,11 @@
 
     <groupId>pdfbasics</groupId>
     <artifactId>pdfbasics</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <properties>
         <!-- version 3 has some class loading issues regarding IOUtils in packaged exe -->
-        <pdfbox.version>2.0.23</pdfbox.version>
+        <pdfbox.version>2.0.24</pdfbox.version>
         
         <maven.compiler.release>16</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.19.0</version>
+            <version>3.20.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

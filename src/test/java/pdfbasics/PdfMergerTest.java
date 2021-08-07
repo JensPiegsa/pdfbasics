@@ -30,7 +30,7 @@ class PdfMergerTest {
 		pdfMerger.mergeContents(fileContents, outputFile);
 
 		then(outputFile).exists();
-		then(Files.size(outputFile)).isEqualTo(673_548L);
+		then(Files.size(outputFile)).isEqualTo(682_143L);
 	}
 
 }
