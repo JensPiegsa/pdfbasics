@@ -37,7 +37,7 @@ public class PdfBasicsMain extends JFrame {
 	}
 
 	public PdfBasicsMain(final PdfMerger pdfMerger) {
-		super("PDF Basics 1.0");
+		super("PDF Basics 1.0.1");
 		this.pdfMerger = pdfMerger;
 
 		final Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("pdfbasics.png"));
@@ -57,9 +57,7 @@ public class PdfBasicsMain extends JFrame {
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 
 		final JButton clearListButton = new JButton("Clear list");
-		clearListButton.addActionListener(e -> {
-			listModel.clear();
-		});
+		clearListButton.addActionListener(e -> listModel.clear());
 		
 		final JButton mergeButton = new JButton("Merge PDF files");
 		mergeButton.addActionListener(e -> {

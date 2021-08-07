@@ -6,7 +6,7 @@ It allows you to compile a list of PDF files via drag and drop and merge it into
 
 ## Setup ##
 
-* Download [pdfbasics-1.0-win-64.zip](https://github.com/JensPiegsa/pdfbasics/releases/download/1.0.1/pdfbasics-1.0.1-win-64.zip) (30MB)
+* Download [pdfbasics-1.0.1-win-64.zip](https://github.com/JensPiegsa/pdfbasics/releases/download/1.0.1/pdfbasics-1.0.1-win-64.zip) (30MB)
 * Unzip the archive locally
 * Run `pdfbasics.exe`
 
