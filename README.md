@@ -1,7 +1,5 @@
-# PDF Basics <img src="assets/pdfbasics.svg" width="15%" align="right" />
+# PDF Basics <img src="assets/pdfbasics.svg" width="20%" align="right" />
 
-[![Integration Build Status](https://travis-ci.com/JensPiegsa/pdfbasics.svg?branch=master)](https://travis-ci.com/JensPiegsa/pdfbasics)
-[![Code Coverage](https://codecov.io/gh/JensPiegsa/pdfbasics/branch/master/graph/badge.svg)](https://codecov.io/gh/JensPiegsa/pdfbasics)
 [![Open Source](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://wikipedia.org/wiki/Open_Source)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3WB8AXMP4VY98)
 
