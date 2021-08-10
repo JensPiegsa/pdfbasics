@@ -1,4 +1,4 @@
-# PDF Basics #
+# PDF Basics <img src="assets/pdfbasics.svg" width="15%" align="right" />
 
 This is a portable free PDF tool for Windows.
 
