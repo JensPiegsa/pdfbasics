@@ -1,6 +1,7 @@
 # PDF Basics <img src="assets/pdfbasics.svg" width="20%" align="right" />
 
 [![Open Source](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://wikipedia.org/wiki/Open_Source)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3WB8AXMP4VY98)
 
 This is a portable free PDF tool for Windows.
